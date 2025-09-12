@@ -1,0 +1,69 @@
+{
+  "manifest_version": 3,
+  "name": "Smart Bookmark Search",
+  "version": "1.0.0",
+  "description": "Intelligent search engine for your bookmarks - search through the actual content of your bookmarked pages",
+  
+  "permissions": [
+    "bookmarks",
+    "activeTab",
+    "storage",
+    "webRequest",
+    "host_permissions"
+  ],
+  
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content/content-script.js"],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Smart Bookmark Search",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png",
+      "48": "assets/icons/icon-48.png",
+      "128": "assets/icons/icon-128.png"
+    }
+  },
+  
+  "options_page": "options/options.html",
+  
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  
+  "commands": {
+    "open-search": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Open bookmark search"
+    }
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*", "content/*"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ]
+}
