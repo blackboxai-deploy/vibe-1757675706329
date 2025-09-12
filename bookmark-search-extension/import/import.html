@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Bookmark Search - Import Tool</title>
+  <link rel="stylesheet" href="import.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M12,12L16,16H13.5V19H10.5V16H8L12,12Z"/>
+          </svg>
+          <div>
+            <h1>Bookmark Import Tool</h1>
+            <p>Import bookmarks from any browser</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="backToExtension" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+            </svg>
+            Back to Extension
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Import Steps -->
+      <div class="steps-container">
+        <div class="steps">
+          <div class="step active" data-step="1">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Choose Source</h3>
+              <p>Select your browser</p>
+            </div>
+          </div>
+          <div class="step" data-step="2">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Upload File</h3>
+              <p>Import JSON/HTML</p>
+            </div>
+          </div>
+          <div class="step" data-step="3">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Process</h3>
+              <p>Analyze & Import</p>
+            </div>
+          </div>
+          <div class="step" data-step="4">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>Complete</h3>
+              <p>Ready to search</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1: Browser Selection -->
+      <section id="step1" class="step-content active">
+        <div class="browser-selection">
+          <h2>Choose Your Browser</h2>
+          <p class="step-description">
+            Select the browser where your bookmarks came from to ensure proper parsing
+          </p>
+          
+          <div class="browser-grid">
+            <div class="browser-card" data-browser="chrome">
+              <div class="browser-icon chrome">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" fill="none" stroke-width="2"/>
+                  <path d="M21.17 8L18 21"/>
+                  <path d="M6.83 16L10 3"/>
+                  <path d="M12 2V6"/>
+                  <path d="M12 18V22"/>
+                </svg>
+              </div>
+              <h3>Google Chrome</h3>
+              <p>JSON export from Chrome bookmarks</p>
+              <div class="file-formats">
+                <span class="format">JSON</span>
+                <span class="format">HTML</span>
+              </div>
+            </div>
+
+            <div class="browser-card" data-browser="firefox">
+              <div class="browser-icon firefox">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
+                </svg>
+              </div>
+              <h3>Mozilla Firefox</h3>
+              <p>JSON or HTML export from Firefox</p>
+              <div class="file-formats">
+                <span class="format">JSON</span>
+                <span class="format">HTML</span>
+              </div>
+            </div>
+
+            <div class="browser-card" data-browser="edge">
+              <div class="browser-icon edge">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M21.5,12.5C21.5,17.19 17.69,21 13,21C8.31,21 4.5,17.19 4.5,12.5S8.31,4 13,4C15.83,4 18.29,5.59 19.5,8"/>
+                  <path d="M21.5,12.5C21.5,7.81 17.69,4 13,4V21C17.69,21 21.5,17.19 21.5,12.5Z"/>
+                </svg>
+              </div>
+              <h3>Microsoft Edge</h3>
+              <p>JSON or HTML export from Edge</p>
+              <div class="file-formats">
+                <span class="format">JSON</span>
+                <span class="format">HTML</span>
+              </div>
+            </div>
+
+            <div class="browser-card" data-browser="safari">
+              <div class="browser-icon safari">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none" stroke-width="2"/>
+                  <path d="m16.24 7.76-4.24 4.24-4.24-4.24"/>
+                </svg>
+              </div>
+              <h3>Safari</h3>
+              <p>HTML export from Safari bookmarks</p>
+              <div class="file-formats">
+                <span class="format">HTML</span>
+                <span class="format">PLIST</span>
+              </div>
+            </div>
+
+            <div class="browser-card" data-browser="generic">
+              <div class="browser-icon generic">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                </svg>
+              </div>
+              <h3>Other Browser</h3>
+              <p>Generic JSON or HTML format</p>
+              <div class="file-formats">
+                <span class="format">JSON</span>
+                <span class="format">HTML</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="export-instructions" id="exportInstructions">
+            <div class="instruction-card">
+              <h3>How to Export Bookmarks</h3>
+              <div class="instructions-content" id="instructionsContent">
+                <p>Please select a browser above to see specific export instructions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-actions">
+            <button id="nextToUpload" class="btn primary" disabled>
+              Continue to Upload
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12,4L14.75,6.75L11,10.5L17.25,10.5V13.5L11,13.5L14.75,17.25L12,20L4,12L12,4Z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2: File Upload -->
+      <section id="step2" class="step-content">
+        <div class="upload-section">
+          <h2>Upload Bookmark File</h2>
+          <p class="step-description">
+            Drag and drop your bookmark export file or click to browse
+          </p>
+
+          <div class="upload-area" id="uploadArea">
+            <div class="upload-content">
+              <div class="upload-icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M12,12L16,16H13.5V19H10.5V16H8L12,12Z"/>
+                </svg>
+              </div>
+              <h3>Drop your bookmark file here</h3>
+              <p>or click to browse for file</p>
+              <div class="supported-formats">
+                <span class="format-tag">JSON</span>
+                <span class="format-tag">HTML</span>
+                <span class="format-tag">PLIST</span>
+              </div>
+            </div>
+            <input type="file" id="fileInput" accept=".json,.html,.htm,.plist,.xml" multiple style="display: none;">
+          </div>
+
+          <div class="file-info" id="fileInfo">
+            <div class="file-details">
+              <div class="file-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2Z"/>
+                </svg>
+              </div>
+              <div class="file-meta">
+                <div class="file-name" id="fileName"></div>
+                <div class="file-size" id="fileSize"></div>
+                <div class="file-type" id="fileType"></div>
+              </div>
+              <button id="removeFile" class="remove-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="import-options">
+            <h3>Import Options</h3>
+            <div class="options-grid">
+              <label class="option-item">
+                <input type="checkbox" id="preserveFolders" checked>
+                <span class="option-label">
+                  <strong>Preserve Folder Structure</strong>
+                  <span class="option-description">Maintain bookmark organization</span>
+                </span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" id="skipDuplicates" checked>
+                <span class="option-label">
+                  <strong>Skip Duplicates</strong>
+                  <span class="option-description">Avoid importing existing bookmarks</span>
+                </span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" id="validateUrls">
+                <span class="option-label">
+                  <strong>Validate URLs</strong>
+                  <span class="option-description">Check if links are still active</span>
+                </span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" id="autoIndex" checked>
+                <span class="option-label">
+                  <strong>Auto-Index Content</strong>
+                  <span class="option-description">Immediately crawl and index imported bookmarks</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="step-actions">
+            <button id="backToBrowser" class="btn secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+              </svg>
+              Back
+            </button>
+            <button id="startImport" class="btn primary" disabled>
+              Start Import
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3: Processing -->
+      <section id="step3" class="step-content">
+        <div class="processing-section">
+          <h2>Processing Bookmarks</h2>
+          <p class="step-description">
+            Analyzing and importing your bookmarks...
+          </p>
+
+          <div class="progress-container">
+            <div class="progress-circle">
+              <svg class="progress-ring" width="120" height="120">
+                <circle class="progress-ring-circle" stroke="currentColor" stroke-width="6" fill="transparent" r="52" cx="60" cy="60"/>
+              </svg>
+              <div class="progress-text">
+                <span id="progressPercent">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="processing-stats">
+            <div class="stat-item">
+              <span class="stat-label">Total Found:</span>
+              <span class="stat-value" id="totalBookmarks">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Processed:</span>
+              <span class="stat-value" id="processedBookmarks">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Imported:</span>
+              <span class="stat-value" id="importedBookmarks">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Skipped:</span>
+              <span class="stat-value" id="skippedBookmarks">0</span>
+            </div>
+          </div>
+
+          <div class="processing-log">
+            <h3>Import Log</h3>
+            <div class="log-container" id="logContainer">
+              <div class="log-entry">
+                <span class="log-time">00:00</span>
+                <span class="log-message">Starting import process...</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-actions">
+            <button id="cancelImport" class="btn secondary">
+              Cancel Import
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 4: Complete -->
+      <section id="step4" class="step-content">
+        <div class="completion-section">
+          <div class="success-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+            </svg>
+          </div>
+          
+          <h2>Import Complete!</h2>
+          <p class="completion-description">
+            Your bookmarks have been successfully imported and are ready to search.
+          </p>
+
+          <div class="completion-stats">
+            <div class="completion-stat">
+              <div class="stat-number" id="finalImported">0</div>
+              <div class="stat-label">Bookmarks Imported</div>
+            </div>
+            <div class="completion-stat">
+              <div class="stat-number" id="finalFolders">0</div>
+              <div class="stat-label">Folders Created</div>
+            </div>
+            <div class="completion-stat">
+              <div class="stat-number" id="finalIndexed">0</div>
+              <div class="stat-label">Pages Indexed</div>
+            </div>
+          </div>
+
+          <div class="next-steps">
+            <h3>What's Next?</h3>
+            <div class="next-step-items">
+              <div class="next-step-item">
+                <div class="step-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Start Searching</strong>
+                  <p>Use Ctrl+Shift+F to open search and find your bookmarks</p>
+                </div>
+              </div>
+              <div class="next-step-item">
+                <div class="step-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Configure Settings</strong>
+                  <p>Customize search behavior and indexing preferences</p>
+                </div>
+              </div>
+              <div class="next-step-item">
+                <div class="step-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Content Indexing</strong>
+                  <p>The extension will automatically crawl and index your bookmarks</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-actions">
+            <button id="openExtension" class="btn primary large">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+              </svg>
+              Start Searching
+            </button>
+            <button id="importMore" class="btn secondary">
+              Import More Bookmarks
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="import.js"></script>
+</body>
+</html>
